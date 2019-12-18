@@ -1,3 +1,6 @@
+^renv$
+^renv\.lock$
 ^reproducible-reserving\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^README\.Rmd$
