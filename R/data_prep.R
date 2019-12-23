@@ -1,3 +1,23 @@
+generate_claim_data <- function(db_location) {
+    
+# I'm using the simulation machine to generate data for this example. For
+# more information check out the blog post on the kasa.ai website 
+# (https://blog.kasa.ai/posts/simulation-machine/)
+
+    charm <- simulationmachine::simulation_machine(
+        num_claims = 50000, 
+        lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
+        inflation = c(0.01, 0.01, 0.01, 0.01), 
+        sd_claim = 0.85, 
+        sd_recovery = 0.75
+    )
+    
+    claim_history <- simulationmachine::conjure(charm, seed = 1234)
+    #proj_directory <- here::here() 
+    saveRDS(claim_history, file = db_location)
+
+}
+
 download_rawdata <- function(db_location, data_location) {
     # In a real life example with would be accomplished by querying a database or
     # reading data from a csv or spreadsheet.
