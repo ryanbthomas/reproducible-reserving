@@ -14,10 +14,10 @@ local({
     )
     
     claim_history <- conjure(charm, seed = 1234)
-    
+    proj_directory <- here::here() 
     saveRDS(
         claim_history, 
-        file = glue::glue("{here::here()}/01_data/data-raw/claimdata.rda")
+        file = glue::glue("{proj_directory}/01_data/data-raw/claimdata.rda")
     )
 
 })
