@@ -46,6 +46,7 @@ prepare_analysis_objects <- function(raw_data_file, data_objects_dir) {
     
     save_data(enriched_data,"enriched_data.rda")
     #saveRDS(enriched_data, file = fs::path(data_objects_dir, "enriched_data.rda"))
+    save_data(identify_large_losses(enriched_data), "large_losses.rda")
     
     aggregate_data <- save_data(
         aggregate_by_accident_year(enriched_data),
@@ -85,7 +86,6 @@ aggregate_by_accident_year <- function(x) {
 }
 
 enrich_data <- function(x) {
-    #message("Enriching the data") 
     enriched_data <- x %>%
         dplyr::mutate(
             rep_count = 1 * (report_delay <= development_year), 

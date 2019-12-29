@@ -11,10 +11,10 @@
   "Packages": {
     "BH": {
       "Package": "BH",
-      "Version": "1.69.0-1",
+      "Version": "1.72.0-2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f4605d46264b35f53072fc9ee7ace15f"
+      "Hash": "00d67366d2b1bbd0a4dd0279817a66d4"
     },
     "MASS": {
       "Package": "MASS",
@@ -86,6 +86,13 @@
       "Repository": "CRAN",
       "Hash": "f73f76ba9c2c23cbe3a7657f7411ddc4"
     },
+    "checkmate": {
+      "Package": "checkmate",
+      "Version": "1.9.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4704086e092041b648573fe97235f7de"
+    },
     "cli": {
       "Package": "cli",
       "Version": "2.0.0",
@@ -106,6 +113,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6b436e95723d1f0e861224dd9b094dfb"
+    },
+    "commonmark": {
+      "Package": "commonmark",
+      "Version": "1.7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0f22be39ec1d141fd03683c06f3a6e67"
     },
     "conjuror": {
       "Package": "conjuror",
@@ -168,6 +182,13 @@
       "Repository": "CRAN",
       "Hash": "b31d9e5d051553d1177083aeba04b5b9"
     },
+    "farver": {
+      "Package": "farver",
+      "Version": "2.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e1e33215c942e78d2128221079b5dc35"
+    },
     "filelock": {
       "Package": "filelock",
       "Version": "1.0.2",
@@ -209,6 +230,12 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "d4e25697c450c01b202c79ef35694a83"
+    },
+    "gt": {
+      "Package": "gt",
+      "Version": "0.1.0",
+      "Source": "unknown",
+      "Hash": "1f6e0bdbd56e690842e761cc0e8a16ee"
     },
     "gtable": {
       "Package": "gtable",
@@ -338,10 +365,10 @@
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.4.2",
+      "Version": "1.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9f20924c27aee3d09296c22fb84bc9de"
+      "Hash": "fa3ed60396b6998d0427c57dab90fba4"
     },
     "pkgconfig": {
       "Package": "pkgconfig",
@@ -359,10 +386,10 @@
     },
     "plyr": {
       "Package": "plyr",
-      "Version": "1.8.4",
+      "Version": "1.8.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "23026346e3e0f023f326919320627a01"
+      "Hash": "3f1b0dbcc503320e6e7aae6c3ff87eaa"
     },
     "processx": {
       "Package": "processx",
@@ -420,12 +447,19 @@
       "Repository": "CRAN",
       "Hash": "f6a407ae5dd21f6f80a6708bbb6eb3ae"
     },
-    "scales": {
-      "Package": "scales",
-      "Version": "1.0.0",
+    "sass": {
+      "Package": "sass",
+      "Version": "0.1.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2e46c8ab2c109085d5b3a775ea2df19c"
+      "Hash": "bd7168e8f7710ee96b2d5bf94d9c1a38"
+    },
+    "scales": {
+      "Package": "scales",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a1c68369c629ea3188d0676e37069c65"
     },
     "simulationmachine": {
       "Package": "simulationmachine",
@@ -505,10 +539,10 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c40cfd786b30c20ea9f1247f06a7ee56"
+      "Hash": "5c2d0fe441406cba811b46708ea28e41"
     },
     "viridisLite": {
       "Package": "viridisLite",
