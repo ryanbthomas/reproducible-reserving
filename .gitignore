@@ -2,4 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-01_data/data-raw/claimdata.rda
+*.rda
+*.html

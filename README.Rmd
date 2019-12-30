@@ -58,3 +58,60 @@ Every reserving role I've ever been in has had "the template". The Excel spreads
 
 Whatever the provenance, this template gets reused in quarterly or annual reserve reviews, perhasp with some modifications. 
 -->
+
+## Try it yourself
+
+### Note on gt package
+
+This project makes use of two amazing amazing packages that currently have a small
+conflict with each other. The renv package is used to control dependencies to lock
+down the execution environment for this project, and the gt package which is used 
+to create presentation ready tables in Rmarkdown reports. As of this writing 
+(2019-12-29), gt is not on CRAN and so has to be installed from github, but there is currently an issue doing this directly into environments managed by renv (link)
+
+1. clone github repo to local machine
+
+```{bash, eval=FALSE}
+git clone https://github.com/rstudio/gt.git
+```
+
+2. Run check and build gt package
+
+```{r, eval=FALSE}
+# install devtools if not already installed
+# install.packages("devtools")
+
+# run R build check to confirm that all dependencies are present
+devtools::check()
+
+# build gt package locally
+pkg_path <- devtools::build()
+```
+3. Install the package localally
+
+```{r, eval=FALSE}
+devtools::install_local(pkg_path)
+```
+
+
+Once you have the gt package installed on your system you can setup this project
+
+1. clone repo to you computer
+
+```{bash, eval=FALSE}
+git clone https://github.com/actuarialvoodoo/reproducible-reserving.git
+```
+
+2. Open up Rstudio project and restore dependencies
+
+```{r, eval=FALSE}
+renv::restore()
+```
+
+
+3. Run drake plan
+```{r, eval=FALSE}
+drake::r_make()
+```
+
+

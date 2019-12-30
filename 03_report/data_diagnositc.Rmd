@@ -1,0 +1,57 @@
+---
+title: "Data Diagostics"
+author: "Ryan Thomas"
+date: "12/26/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
+## Changes from Prior Analysis
+
+```{r, echo=FALSE}
+data_directory <- fs::path(here::here(), "01_data", "analysis_data")
+
+prior_eval <- readRDS(fs::path(data_directory, "prior_eval.rda"))
+latest_eval <- readRDS(fs::path(data_directory, "latest_eval.rda"))
+
+aggregate_data <- dplyr::bind_rows(prior_eval, latest_eval)
+```
+
+```{r, echo=FALSE}
+aggregate_data %>% 
+    dplyr::filter(accident_year < 2000) %>% 
+    dplyr::arrange(accident_year, development_year) %>% 
+    dplyr::group_by(accident_year) %>% 
+    dplyr::summarise_at(
+        .vars = c("rep_count", "open_count", "closed_count", "cum_paid_loss"), 
+        .funs = diff
+    ) %>% 
+    gt::gt() %>%
+    gt::tab_header(
+        title = "Incremental Changes in Counts and Losses",
+        subtitle = "Calendar Year 2000"
+    ) %>%
+    gt::fmt_currency(
+        columns = vars(cum_paid_loss),
+        currency = "USD",
+        use_subunits = FALSE
+        
+    ) %>%
+    gt::tab_style(
+        style = gt::cell_fill(color = "#ffb2b2"),
+        locations = gt::cells_body(
+            columns = vars(closed_count),
+            rows = closed_count < 0
+        )
+    )
+    
+    
+    
+
+```
+
+
