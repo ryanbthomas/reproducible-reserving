@@ -17,7 +17,7 @@ local({
     proj_directory <- here::here() 
     saveRDS(
         claim_history, 
-        file = glue::glue("{proj_directory}/01_data/data-raw/claimdata.rda")
+        file = glue::glue("{proj_directory}/database/claimdata.rda")
     )
 
 })
