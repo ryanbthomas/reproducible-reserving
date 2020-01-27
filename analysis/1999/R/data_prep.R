@@ -87,7 +87,7 @@ enrich_data <- function(x) {
         arrange(development_year) %>%
         mutate(cum_paid_loss = cumsum(inc_paid_loss))
     
-    enriched_data
+    ungroup(enriched_data)
 }
 
 aggregate_by_accident_year <- function(x) {
@@ -100,5 +100,6 @@ aggregate_by_accident_year <- function(x) {
         inc_paid_loss = sum(paid_loss),
         cum_paid_loss = sum(cum_paid_loss)             
     )
+    
 }
 
