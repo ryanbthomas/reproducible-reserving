@@ -74,26 +74,26 @@ clean_data <- function(x) {
     # This is mostly a placeholder for data cleaning that should happen with 
     # real data.  Here we are only renaming a column to a more clear name
     # 
-    dplyr::mutate(x, inc_paid_loss = paid_loss)
+    mutate(x, inc_paid_loss = paid_loss)
 }
 
 enrich_data <- function(x) {
     enriched_data <- x %>%
-        dplyr::mutate(
+        mutate(
             rep_count = 1 * (report_delay <= development_year), 
             open_count = rep_count * claim_status_open,
             closed_count = rep_count - open_count) %>%
-        dplyr::group_by(claim_id) %>%
-        dplyr::arrange(development_year) %>%
-        dplyr::mutate(cum_paid_loss = cumsum(inc_paid_loss))
+        group_by(claim_id) %>%
+        arrange(development_year) %>%
+        mutate(cum_paid_loss = cumsum(inc_paid_loss))
     
     enriched_data
 }
 
 aggregate_by_accident_year <- function(x) {
-    grp_data <- dplyr::group_by(x, accident_year, development_year)
+    grp_data <- group_by(x, accident_year, development_year)
     
-    dplyr::summarise(grp_data,
+    summarise(grp_data,
         rep_count = sum(rep_count),
         open_count = sum(open_count),
         closed_count = sum(closed_count),
