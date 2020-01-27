@@ -1,14 +1,13 @@
 plan <- drake_plan(
-    # step 1 should be
-    # - download
-    # - clean
-    # - enrich
-    # - create analysis objects
-    make_data = generate_claim_data(file_out("01_data/data-raw/claimdata.rda")),
-    raw_data = download_rawdata(
-        file_in("01_data/data-raw/claimdata.rda"), 
-        file_out("01_data/raw_data.rda")),
-    prepare_data = prepare_analysis_objects(
-        file_in("01_data/raw_data.rda"),
-        file_out("01_data/analysis_data"))
+    raw_data = fetch_rawdata(file_in("data/1999-12-31_control-totals.xlsx")),
+    pricing_data = load_pricingdata(file_in("data/1999-12-31_pricingdata.xlsx")),
+    #prior_data = load_priordata(file_in("data/"))
+    enriched_data = clean_enrich_data(raw_data),
+    triangles = create_triangle(enriched_data),
+    latest_data = create_latest_data(pricing_data, enriched_data),
+    #diagnostics
+    ldfs = make_ldfs(triangles),
+    estimates = make_estimates(latest_data, ldfs),
+    # report
+    
 )
