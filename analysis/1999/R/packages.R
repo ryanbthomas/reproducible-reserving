@@ -1,8 +1,10 @@
 suppressPackageStartupMessages({
+    library(assertthat)
     library(drake)
     require(callr)
-    
     library(dplyr)
+    library(here)
+    library(readxl)
     library(tidyr)
     library(tibble)
     library(ggplot2)
