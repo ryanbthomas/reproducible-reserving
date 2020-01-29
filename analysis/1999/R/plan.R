@@ -7,7 +7,8 @@ plan <- drake_plan(
     latest_data = create_latest_data(enriched_data, pricing_data),
     #diagnostics
     ldfs = make_ldfs(triangles)
-    #estimates = make_estimates(latest_data, ldfs),
+    #,
+    #estimates = make_estimates(latest_data, ldfs)
     # report
     
 )

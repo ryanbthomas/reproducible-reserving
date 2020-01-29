@@ -1,21 +1,25 @@
-calc_chainladder <- function(x, col, ldf) {
-    if (!("data.frame" %in% class(ldf))) {
-        stop("`ldf` must inherit from data.frame", call. = FALSE)
-    }
-    if (!("data.frame" %in% class(x))) {
-        stop("`x` must inherit from data.frame", call. = FALSE)
-    }
-    if (!all(c("age", "factor") %in% colnames(ldf))) {
-        stop("Required colnames 'age' and 'factor' not found in `ldf`", call. = FALSE)
-    }
-    if (!("age" %in% colnames(x))) {
-        stop("Required colname 'age' not found in `x`", call. = FALSE)
-    }
+calc_chainladder <- function(x, type_col, ldf) {
+    # if (!("data.frame" %in% class(ldf))) {
+    #     stop("`ldf` must inherit from data.frame", call. = FALSE)
+    # }
+    # if (!("data.frame" %in% class(x))) {
+    #     stop("`x` must inherit from data.frame", call. = FALSE)
+    # }
+    # if (!all(c("age", "factor") %in% colnames(ldf))) {
+    #     stop("Required colnames 'age' and 'factor' not found in `ldf`", call. = FALSE)
+    # }
+    # if (!("age" %in% colnames(x))) {
+    #     stop("Required colname 'age' not found in `x`", call. = FALSE)
+    # }
     
-    var <- rlang::quo(col)
-    dplyr::inner_join(x, ldf, by = "age") %>%
-        dplyr::mutate(estimate = var * ldf) %>%
-        dplyr::pull(estimate)
+    
+    factors <- filter(ungroup(ldfs), triangle_type == type_col) %>%
+        pull(factors) %>% {.[[1]]} 
+    
+    
+    inner_join(x, factors, by = "age") %>%
+        mutate(estimate = !!as.name(type_col) * select_values) %>%
+        pull(estimate)
 }
 
 calc_capecod <- function(x, ldfs){
@@ -81,7 +85,15 @@ make_ldfs <- function(triangles){
         group_by(triangle_type) %>%
         mutate(factors = list(select_age_to_age(ldfs[[1]], triangle_type)))
     
-    link_ratios
+    link_ratios %>% 
+        ungroup() %>% 
+        filter(triangle_type %in% c("cum_paid_loss", "rep_count")) %>% 
+        select(triangle_type, factors) %>% 
+        unnest(factors) %>% 
+        pivot_wider(id_cols = "age", 
+                    names_from = "triangle_type", 
+                    names_prefix = "dev_", 
+                    values_from = select_values)
 }
 
 estimate_age_to_age <- function(triangle) {
@@ -115,3 +127,15 @@ cumprodrev <- function(x) {
     tmp[length(tmp):1]
 }
     
+make_estimates <- function(x, ldfs) {
+    # add chain ladder estimates of cum_paid_loss and reported_count
+    
+    estimates <- x %>% 
+        mutate(
+            apriori_loss = priced_lossratio * premium,
+            cl_reported_count = calc_chainladder(., "rep_count", ldfs),
+            cl_cum_paid_loss = calc_chainladder(., "cum_paid_loss", ldfs),
+        )
+    
+    estimates
+}
